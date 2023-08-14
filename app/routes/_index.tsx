@@ -3,8 +3,11 @@ import { useLoaderData, useLocation, useNavigate } from '@remix-run/react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
-import type { Handle } from '~/types/handle';
-import type { IMedia } from '~/types/media';
+import Banner from '~/components/Ads/Ad1';
+import Bannerb from '~/components/Ads/Ad2';
+import MediaList from '~/components/media/MediaList';
+import featuredList from '~/constants/featuredList';
+import { useTypedRouteLoaderData } from '~/hooks/useTypedRouteLoaderData';
 import { getAnimePopular } from '~/services/consumet/anilist/anilist.server';
 import { i18next } from '~/services/i18n';
 import { authenticate } from '~/services/supabase';
@@ -14,10 +17,9 @@ import {
   getListPeople,
   getTrending,
 } from '~/services/tmdb/tmdb.server';
+import type { Handle } from '~/types/handle';
+import type { IMedia } from '~/types/media';
 import { CACHE_CONTROL } from '~/utils/server/http';
-import { useTypedRouteLoaderData } from '~/hooks/useTypedRouteLoaderData';
-import featuredList from '~/constants/featuredList';
-import MediaList from '~/components/media/MediaList';
 
 export const handle: Handle = {
   disableLayoutPadding: true,
@@ -101,6 +103,7 @@ const RootIndex = () => {
         key="slider-banner-home"
         listType="slider-banner"
       />
+      <Banner />
       <div className="mt-9 flex w-full flex-col items-center justify-start px-3 sm:px-5">
         <MediaList
           genresMovie={rootData?.genresMovie}
@@ -126,6 +129,8 @@ const RootIndex = () => {
           onClickViewMore={() => onClickViewMore('tv-shows')}
           showMoreList
         />
+        <Bannerb />
+        <Bannerb />
         <MediaList
           items={popularAnime}
           itemsType="anime"
